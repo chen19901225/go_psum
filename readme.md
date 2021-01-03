@@ -44,3 +44,16 @@ name   count  mem     open_files  net_connections
 ----   -----  ---     ----------  ---------------
 nginx  6      79.35m  142         37
 ```
+
+### use with watch
+
+
+```
+Every 2.0s: sudo ./go_psum --name=redis,nginx --exclude=redis --show=0                                                                                                                          Sun Jan  3 14:04:25 2021
+
+name   count  mem     open_files  net_connections
+----   -----  ---     ----------  ---------------
+nginx  6      79.35m  142         37
+
+
+```
