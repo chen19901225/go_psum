@@ -185,6 +185,11 @@ func print(list []*ProcessPair, log func(string)) {
 				// var memSize uint64 = 0
 				if err == nil {
 					memSize = memInfo.RSS + memSize
+				} else {
+					if strings.Index(err.Error(), "no such file or directory") > -1 {
+						continue
+					}
+					panic(err)
 				}
 				// pid := rawProcess.Pid
 				// openFileCount := 0
@@ -192,10 +197,10 @@ func print(list []*ProcessPair, log func(string)) {
 				if err == nil {
 					open_file_count = open_file_count + len(openFileStat)
 				} else {
-					// errStr := err.Error()
-					// if strings.In
+					if strings.Index(err.Error(), "no such file or directory") > -1 {
+						continue
+					}
 					panic(err)
-
 				}
 
 				// net_connection_count := 0
@@ -203,6 +208,9 @@ func print(list []*ProcessPair, log func(string)) {
 				if err == nil {
 					net_connection_count = net_connection_count + len(netcountList)
 				} else {
+					if strings.Index(err.Error(), "no such file or directory") > -1 {
+						continue
+					}
 					panic(err)
 				}
 			} // processName == name
@@ -233,6 +241,11 @@ func printDetail(list []*ProcessPair, log func(string)) {
 		var memSize uint64 = 0
 		if err == nil {
 			memSize = memInfo.RSS + memSize
+		} else {
+			if strings.Index(err.Error(), "no such file or directory") > -1 {
+				continue
+			}
+			panic(err)
 		}
 		pid := rawProcess.Pid
 		openFileCount := 0
@@ -240,10 +253,10 @@ func printDetail(list []*ProcessPair, log func(string)) {
 		if err == nil {
 			openFileCount = len(openFileStat)
 		} else {
-			// errStr := err.Error()
-			// if strings.In
+			if strings.Index(err.Error(), "no such file or directory") > -1 {
+				continue
+			}
 			panic(err)
-
 		}
 
 		net_connection_count := 0
@@ -251,6 +264,9 @@ func printDetail(list []*ProcessPair, log func(string)) {
 		if err == nil {
 			net_connection_count = len(netcountList)
 		} else {
+			if strings.Index(err.Error(), "no such file or directory") > -1 {
+				continue
+			}
 			panic(err)
 		}
 
